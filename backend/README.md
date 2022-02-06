@@ -1,6 +1,6 @@
 # Backend da Nabstore
 #### Aluno: Nabson Paiva
-Este diretório possui o backend (API Rest) da loja online desenvolvida com NodeJS.
+Este diretório possui o backend (API Rest) da loja online Nabstore desenvolvida em NodeJS.
 
 ## Para executar pela primeira vez
 1. **Execução da API e do banco**:
@@ -23,7 +23,7 @@ Este diretório possui o backend (API Rest) da loja online desenvolvida com Node
 
 3. **Inserir seeds**:
     ```bash
-    make db-seed-insert
+    make db-seed
     ```
     ou
     ```bash
@@ -31,7 +31,7 @@ Este diretório possui o backend (API Rest) da loja online desenvolvida com Node
     ```
 
 
-## Comandos do Banco de Dados
+## Outros comandos
 
 1. Abrir um terminal interativo:
     ```bash
@@ -43,9 +43,9 @@ Este diretório possui o backend (API Rest) da loja online desenvolvida com Node
     make db-model-create NEW_MODEL_NAME=<model_name> NEW_MODEL_ATTRIBUTES=<att1=type,att2=type...>
     ```
 
-3. Executar migrações:
+3. Dar rollback no banco:
     ```bash
-    make db-migrate
+    make db-rollback
     ```
 
 4. Criar um novo seed:
@@ -53,7 +53,13 @@ Este diretório possui o backend (API Rest) da loja online desenvolvida com Node
     make db-seed-create NEW_SEED_NAME=<seed_name>
     ```
 
-4. Inserir no banco todos os seeds:
+5. Dar rollback apenas no seed:
     ```bash
-    make db-seed-insert
+    make db-seed-rollback
     ```
+
+6. Atualizar documentação no Swagger:
+    ```bash
+    make swagger
+    ```
+
