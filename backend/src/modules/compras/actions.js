@@ -50,7 +50,8 @@ const index = async(req, res) => {
         estimatedDeliveryDate: {
           [Op.lt]: today,
         }
-      }
+      },
+      order: ['createdAt', 'DESC']
     });
     
     const compras = await Compra.findAll({ 
@@ -58,8 +59,6 @@ const index = async(req, res) => {
         usuarioId: req.session.userId
       },
       include: [CompraItem],
-      raw: true,
-      nest: true,
     });
 
     res.status(200).send(compras);

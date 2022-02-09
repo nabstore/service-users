@@ -176,9 +176,25 @@ const fetchCartoes = async () => {
   return res.data;
 };
 
+const fetchCompras = async () => {
+  const res = await api.get(`/compras`, {
+    withCredentials: true,
+  });
+  return res.data;
+};
+
+const fetchCompraById = async (id) => {
+  const res = await api.get(`/compras/${id}`, {
+    withCredentials: true,
+  });
+  return res.data;
+};
+
 const apiMethods = {
   fetchProdutos,
   fetchProdutoById,
+  fetchCompras,
+  fetchCompraById,
   createProduto,
   createCartao,
   fetchCartoes,

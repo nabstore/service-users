@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlusCircle, faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
 import {
   Card,
@@ -15,11 +15,11 @@ import api from "../../services/api";
 import { NO_IMAGE_URL } from "../../utils/images";
 import LoadingIcons from "react-loading-icons";
 import AddProduto from "../AddProduto/AddProduto";
+import { currencyFormat } from "../../utils/format";
 
 const Produtos = () => {
   const [produtos, setProdutos] = useState(null);
-  const [searchString, setSearchString] = useState("");
-  const [searchResult, setSearchResult] = useState([]);
+  const [compras, setCompras] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [page, setPage] = useState(1);
   const user = useSelector((state) => state.user);
@@ -32,14 +32,11 @@ const Produtos = () => {
   }, []);
 
   useEffect(() => {
-    if (produtos) {
-      setSearchResult(
-        produtos.filter((p) =>
-          p.nome?.toLowerCase().includes(searchString.toLowerCase())
-        )
-      );
-    }
-  }, [searchString, produtos]);
+    api
+      .fetchCompras()
+      .then((resp) => setCompras(resp))
+      .catch((err) => console.error("Erro ao carregar compras"));
+  }, []);
 
   const handleNextPage = () => {
     api
@@ -66,42 +63,11 @@ const Produtos = () => {
       return <LoadingIcons.Oval className="mt-5" stroke="#2f2f2f" />;
     }
 
-    if (
-      produtos.length === 0 ||
-      (searchString !== "" && searchResult.length === 0)
-    ) {
+    if (produtos.length === 0) {
       return <NoProdutosText>Nenhum produto listado.</NoProdutosText>;
     }
 
-    if (searchString === "") {
-      return produtos.map((produto) => (
-        <Card className="card" key={produto.id}>
-          <img
-            src={api.getImageUrl(produto.id)}
-            className="card-img-top"
-            onError={(e) => (e.target.src = NO_IMAGE_URL)}
-            alt={produto.nome}
-          />
-          <div className="card-body">
-            <h5 className="card-title">{produto.nome}</h5>
-            <p className="card-text">
-              {produto.descricao?.length > 75
-                ? `${produto.descricao.slice(0, 75)}...`
-                : produto.descricao}
-            </p>
-          </div>
-          <ul className="list-group list-group-flush">
-            <li className="list-group-item d-flex justify-content-center">
-              <ViewDetailsLink to={`/produto/${produto.id}`}>
-                Ver detalhes
-              </ViewDetailsLink>
-            </li>
-          </ul>
-        </Card>
-      ));
-    }
-
-    return searchResult.map((produto) => (
+    return produtos.map((produto) => (
       <Card className="card" key={produto.id}>
         <img
           src={api.getImageUrl(produto.id)}
@@ -128,12 +94,70 @@ const Produtos = () => {
     ));
   };
 
+  const UltimasCompras = () => {
+    if (!compras) {
+      return <></>;
+    }
+
+    const dadosDaEntrega = (compra) => {
+      if (compra.deliveredAt) {
+        return `Entrega realizada em ${new Date(
+          compra.deliveredAt
+        ).toLocaleDateString()}.`;
+      }
+
+      return (
+        <span style={{ color: "green", fontWeight: 500 }}>
+          Chega dia{" "}
+          {new Date(compra.estimatedDeliveryDate).toLocaleDateString()}.
+        </span>
+      );
+    };
+
+    return (
+      <div className="d-flex flex-column justify-content-center mb-4">
+        <div className="d-flex flex-row align-items-center">
+          <Title className="float-start">Últimas Compras</Title>
+          <ViewDetailsLink className="ms-4" to={`/compras`}>Ver todas</ViewDetailsLink>
+        </div>
+        <div className="d-flex flex-wrap mt-3 justify-content-center">
+          {compras.slice(0, 4).map((compra) => (
+            <Card style={{ width: "16rem" }} className="card" key={compra.id}>
+              <img
+                className="card-img-top"
+                src={api.getImageUrl(compra.CompraItems[0].id)}
+                onError={(e) => (e.target.src = NO_IMAGE_URL)}
+                alt={compra.CompraItems.nome}
+              />
+              <div className="card-body">
+                <h5 className="card-title">
+                  Feita em {new Date(compra.createdAt).toLocaleDateString()}
+                </h5>
+                {dadosDaEntrega(compra)}
+              </div>
+              <ul className="list-group list-group-flush">
+                <li className="list-group-item d-flex justify-content-center">
+                  <ViewDetailsLink to={`/compras/${compra.id}`}>
+                    Ver detalhes
+                  </ViewDetailsLink>
+                </li>
+              </ul>
+            </Card>
+          ))}
+        </div>
+        <hr className="mt-4" />
+      </div>
+    );
+  };
+
   return (
-    <>
+    <div className="d-flex flex-column justify-content-center">
       <AddProduto
         handleClose={() => setShowModal(false)}
         showModal={showModal}
       />
+
+      <UltimasCompras />
 
       <div>
         <Title className="float-start">Produtos</Title>
@@ -149,47 +173,28 @@ const Produtos = () => {
         )}
       </div>
 
-      <div className="input-group mb-3">
-        <span className="input-group-text" id="basic-addon1">
-          <FontAwesomeIcon icon={faSearch} />
-        </span>
-        <input
-          type="text"
-          className="form-control"
-          placeholder="Buscar produto"
-          aria-label="Buscar produto"
-          aria-describedby="basic-addon1"
-          value={searchString}
-          onChange={(e) => setSearchString(e.target.value)}
-        />
-      </div>
-
-      <ProdutosContainer className="d-flex flex-wrap">
+      <ProdutosContainer className="d-flex flex-wrap mt-3">
         <ProdutosList />
       </ProdutosContainer>
 
-      {searchString === "" ? (
-        <div className="d-flex flex-row justify-content-center align-items-center">
-          <ChangePageButton
-            className="btn btn-primary"
-            onClick={handlePreviousPage}
-            disabled={page <= 1}
-          >
-            Anterior
-          </ChangePageButton>
-          {page}
-          <ChangePageButton
-            className="btn btn-primary"
-            onClick={handleNextPage}
-            disabled={produtos?.length < 10}
-          >
-            Próxima
-          </ChangePageButton>
-        </div>
-      ) : (
-        <></>
-      )}
-    </>
+      <div className="d-flex flex-row justify-content-center align-items-center">
+        <ChangePageButton
+          className="btn btn-primary"
+          onClick={handlePreviousPage}
+          disabled={page <= 1}
+        >
+          Anterior
+        </ChangePageButton>
+        {page}
+        <ChangePageButton
+          className="btn btn-primary"
+          onClick={handleNextPage}
+          disabled={produtos?.length < 10}
+        >
+          Próxima
+        </ChangePageButton>
+      </div>
+    </div>
   );
 };
 
