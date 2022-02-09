@@ -10,13 +10,15 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       this.belongsTo(models.Usuario);
       this.belongsTo(models.Endereco);
-      this.hasMany(models.Compra);
+      this.belongsTo(models.Cartao);
+      this.hasMany(models.CompraItem);
     }
   }
   Compra.init(
     {
       usuarioId: DataTypes.INTEGER,
       enderecoId: DataTypes.INTEGER,
+      cartaoId: DataTypes.INTEGER,
     },
     {
       sequelize,

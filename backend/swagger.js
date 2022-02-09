@@ -4,7 +4,8 @@ const outputFile = './swagger_output.json'
 const endpointsFiles = [
     './src/modules/produtos/routes.js',
     './src/modules/usuarios/routes.js',
-    './src/modules/compras/routes.js'
+    './src/modules/compras/routes.js',
+    './src/modules/cartao/routes.js',
 ]
 const doc = {
     info: {
@@ -13,20 +14,7 @@ const doc = {
       description: 'Backend em monolito da loja Nabstore.',
     },
     host: 'localhost:3020',
-    tags: [
-      {
-        name: 'Usuarios',
-        description: 'Rotas de usuários com persistência no banco.',
-      },
-      {
-        name: 'Produtos',
-        description: 'CRUD de produtos com banco de dados.',
-      },
-      {
-        name: 'Compras',
-        description: 'Criação de compras com banco de dados.',
-      }
-    ],
+    tags: [],
   };
 
 swaggerAutogen(outputFile, endpointsFiles, doc)

@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsTo(models.TipoUsuario);
       this.hasMany(models.Endereco);
       this.hasMany(models.Compra);
+      this.hasMany(models.Cartao);
     }
   }
   Usuario.init(
