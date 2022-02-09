@@ -120,11 +120,12 @@ const uploadImage = (produtoId, formData) => {
   return res.data;
 };
 
-const comprar = async ({ userId, produtos }) => {
+const comprar = async ({ userId, enderecoId, produtos }) => {
   const res = await api.post(
     `/compras`,
     {
       userId,
+      enderecoId,
       produtos,
     },
     {

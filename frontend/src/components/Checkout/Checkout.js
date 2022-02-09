@@ -32,6 +32,7 @@ const Checkout = () => {
     api
       .comprar({
         userId: user.id,
+        enderecoId: cart.enderecoEscolhido.id,
         produtos: cart.produtos.map((prod) => ({
           produtoId: prod.id,
           quantidade: prod.qtd,

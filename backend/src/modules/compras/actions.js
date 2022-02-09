@@ -6,6 +6,7 @@ const create = async (req, res) => {
   try {
     const compra = await Compra.create({
       usuarioId: req.body.userId,
+      enderecoId: req.body.enderecoId,
       date: new Date(),
     });
 

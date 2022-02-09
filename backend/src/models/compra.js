@@ -9,13 +9,14 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       this.belongsTo(models.Usuario);
+      this.belongsTo(models.Endereco);
       this.hasMany(models.Compra);
     }
   }
   Compra.init(
     {
       usuarioId: DataTypes.INTEGER,
-      data: DataTypes.DATE,
+      enderecoId: DataTypes.INTEGER,
     },
     {
       sequelize,

@@ -11,8 +11,8 @@ module.exports = {
       usuarioId: {
         type: Sequelize.INTEGER
       },
-      data: {
-        type: Sequelize.DATE
+      enderecoId: {
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,

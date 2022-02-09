@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       this.belongsTo(models.Usuario);
+      this.hasMany(models.Compra);
     }
   }
   Endereco.init(
