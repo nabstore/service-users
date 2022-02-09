@@ -107,7 +107,7 @@ const update = async (req, res) => {
       produto.descricao = req.body.descricao;
     }
 
-    console.log(await Produto.update(produto, { where: { id } }));
+    await Produto.update(produto, { where: { id } });
     res.status(200).send(produto);
   } catch (error) {
     res.status(400).send(error);

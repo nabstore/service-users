@@ -14,6 +14,14 @@ module.exports = {
       enderecoId: {
         type: Sequelize.INTEGER
       },
+      deliveredAt: {
+        allowNull: true,
+        type: Sequelize.DATE
+      },
+      estimatedDeliveryDate: {
+        allowNull: false,
+        type: Sequelize.DATE
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

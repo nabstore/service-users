@@ -1,14 +1,17 @@
 import { Cartao, Compra, CompraItem, Endereco, Produto } from "../../models/index";
+const { Op } = require("sequelize");
 
 const create = async (req, res) => {
   // #swagger.tags = ['Compras']
   // #swagger.summary = 'Realiza uma compra e salva no banco.'
+  const estimatedDeliveryDate = new Date();
+  estimatedDeliveryDate.setDate(estimatedDeliveryDate.getDate() - 7)
   try {
     const compra = await Compra.create({
       usuarioId: req.session.userId,
       enderecoId: req.body.enderecoId,
       cartaoId: req.body.cartaoId,
-      date: new Date(),
+      estimatedDeliveryDate: estimatedDeliveryDate,
     });
 
     const compraItens = req.body.produtos.map((produto) => ({
@@ -40,12 +43,25 @@ const index = async(req, res) => {
   // #swagger.tags = ['Compras']
   // #swagger.summary = 'Retorna uma lista com todas as compras do usuário logado'
   try {
+    // Realiza a entrega de compras cuja entrega estimada já foi alcançada
+    const today = new Date();
+    await Compra.update({ deliveredAt: today }, {
+      where: {
+        estimatedDeliveryDate: {
+          [Op.lt]: today,
+        }
+      }
+    });
+    
     const compras = await Compra.findAll({ 
       where: {
         usuarioId: req.session.userId
       },
       include: [CompraItem],
+      raw: true,
+      nest: true,
     });
+
     res.status(200).send(compras);
   } catch (error) {
     res.status(500).send(error);

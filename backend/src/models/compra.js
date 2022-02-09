@@ -19,6 +19,8 @@ module.exports = (sequelize, DataTypes) => {
       usuarioId: DataTypes.INTEGER,
       enderecoId: DataTypes.INTEGER,
       cartaoId: DataTypes.INTEGER,
+      deliveredAt: DataTypes.DATE,
+      estimatedDeliveryDate: DataTypes.DATE,
     },
     {
       sequelize,
