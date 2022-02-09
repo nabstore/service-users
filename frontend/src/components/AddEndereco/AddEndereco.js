@@ -6,7 +6,6 @@ import { SubmitButton } from "../AddProduto/styles";
 import { useNavigate } from "react-router";
 
 const AddEndereco = ({ showModal, handleClose }) => {
-  const user = useSelector((state) => state.user);
   const [logradouro, setLogradouro] = useState("");
   const [bairro, setBairro] = useState("");
   const [numero, setNumero] = useState(0);
@@ -25,7 +24,6 @@ const AddEndereco = ({ showModal, handleClose }) => {
         cep,
         uf,
         cidade,
-        usuarioId: user.id,
       })
       .then((resp) => {
         navigate(0);

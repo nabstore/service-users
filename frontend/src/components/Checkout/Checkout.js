@@ -32,6 +32,7 @@ const Checkout = () => {
     api
       .comprar({
         userId: user.id,
+        cartaoId: cart.cartaoEscolhido.id,
         enderecoId: cart.enderecoEscolhido.id,
         produtos: cart.produtos.map((prod) => ({
           produtoId: prod.id,
@@ -79,6 +80,15 @@ const Checkout = () => {
             <Info>Taxa de Entrega:</Info>
             <Value bold style={{ color: "green" }}>
               Grátis
+            </Value>
+          </div>
+
+          <hr />
+
+          <div className="mt-3 mb-3 d-flex  flex-row justify-content-between">
+            <Info>Cartão:</Info>
+            <Value bold style={{ color: "green" }}>
+              {cart.cartaoEscolhido?.apelido}
             </Value>
           </div>
 

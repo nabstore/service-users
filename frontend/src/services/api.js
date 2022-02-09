@@ -86,7 +86,7 @@ const logout = async () => {
   return res.data;
 };
 
-const fetchEnderecos = async (usuarioId) => {
+const fetchEnderecos = async () => {
   const res = await api.get(`/enderecos`, {
     withCredentials: true,
   });
@@ -130,12 +130,13 @@ const uploadImage = (produtoId, formData) => {
   return res.data;
 };
 
-const comprar = async ({ userId, enderecoId, produtos }) => {
+const comprar = async ({ userId, cartaoId, enderecoId, produtos }) => {
   const res = await api.post(
     `/compras`,
     {
       userId,
       enderecoId,
+      cartaoId,
       produtos,
     },
     {
@@ -148,10 +149,39 @@ const comprar = async ({ userId, enderecoId, produtos }) => {
   return res.data;
 };
 
+const createCartao = async ({ number, apelido, validade, cvv, titular }) => {
+  const res = await api.post(
+    `/cartao`,
+    {
+      number,
+      apelido,
+      validade,
+      cvv,
+      titular,
+    },
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      withCredentials: true,
+    }
+  );
+  return res.data;
+};
+
+const fetchCartoes = async () => {
+  const res = await api.get(`/cartao`, {
+    withCredentials: true,
+  });
+  return res.data;
+};
+
 const apiMethods = {
   fetchProdutos,
   fetchProdutoById,
   createProduto,
+  createCartao,
+  fetchCartoes,
   editProduto,
   deleteProduto,
   login,

@@ -9,5 +9,6 @@ export { default as AddColaborador } from "./AddColaborador/AddColaborador";
 export { default as Signup } from "./Signup/Signup";
 export { default as Cart } from "./Cart/Cart";
 export { default as Enderecos } from "./Enderecos/Enderecos";
+export { default as Cartoes } from "./Cartoes/Cartoes";
 export { default as AddEndereco } from "./AddEndereco/AddEndereco";
 export { default as Checkout } from "./Checkout/Checkout";

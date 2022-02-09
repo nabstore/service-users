@@ -30,7 +30,7 @@ const Cart = () => {
 
   const handleComprar = () => {
     if (user.logado) {
-      navigate("/enderecos");
+      navigate("/cartoes");
     } else {
       navigate("/login");
     }

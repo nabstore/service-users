@@ -5,6 +5,7 @@ const initialState = localStorage.getItem("cart")
   : {
       produtos: [],
       enderecoEscolhido: undefined,
+      cartaoEscolhido: undefined,
     };
 
 export const cartSlicer = createSlice({
@@ -64,6 +65,24 @@ export const cartSlicer = createSlice({
 
       return newState;
     },
+    selectCartao: (state, action) => {
+      const cartaoEscolhido = {
+        id: action.payload.id,
+        number: action.payload.number,
+        apelido: action.payload.apelido,
+        validade: action.payload.validade,
+        cvv: action.payload.cvv,
+        titular: action.payload.titular,
+      }
+
+      const newState = {
+        ...state,
+        cartaoEscolhido
+      }
+      localStorage.setItem("cart", JSON.stringify(newState));
+
+      return newState;
+    },
     cleanCart: (state) => {
       localStorage.removeItem("cart");
       return initialState;
@@ -72,7 +91,7 @@ export const cartSlicer = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { addProduto, removeProduto, cleanCart, selectEndereco } =
+export const { addProduto, removeProduto, cleanCart, selectEndereco, selectCartao } =
   cartSlicer.actions;
 
 export default cartSlicer.reducer;

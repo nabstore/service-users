@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import {
   AddColaborador,
   Cart,
+  Cartoes,
   Checkout,
   Enderecos,
   Header,
@@ -26,6 +27,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/enderecos" exact element={<Enderecos />} />
+          <Route path="/cartoes" exact element={<Cartoes />} />
           <Route path="/checkout" element={<Checkout />} />
         </Routes>
       </div>
