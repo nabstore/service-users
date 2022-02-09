@@ -1,4 +1,4 @@
-import { Usuario, TipoUsuario, Endereco } from "../../models/index";
+import { Usuario, TipoUsuario } from "../../models/index";
 import bcrypt from "bcrypt";
 
 const index = async (req, res) => {
@@ -85,48 +85,4 @@ const logout = (req, res) => {
   });
 };
 
-const getEnderecos = async (req, res) => {
-  // #swagger.tags = ['Usuarios']
-  // #swagger.summary = 'Lista os endereços de um usuário.'
-  const id = req.params.id;
-
-  if (!id) {
-    res.status(400).send({ msg: "Informe um ID de usuário." });
-  }
-
-  try {
-    const enderecos = await Endereco.findAll({
-      where: {
-        usuarioId: id,
-      },
-    });
-
-    res.status(200).send(enderecos);
-  } catch (error) {
-    res.status(500).send(error);
-  }
-};
-
-const createEndereco = async (req, res) => {
-  // #swagger.tags = ['Usuarios']
-  // #swagger.summary = 'Cria um novo endereço para um usuário.'
-  const id = req.params.id;
-  const endereco = {
-    usuarioId: id,
-    logradouro: req.body.logradouro,
-    numero: req.body.numero,
-    bairro: req.body.bairro,
-    cidade: req.body.cidade,
-    uf: req.body.uf,
-    cep: req.body.cep,
-  }
-  
-  try {
-    const newEndereco = await Endereco.create(endereco);
-    res.status(200).send(newEndereco);
-  } catch (error) {
-    res.status(500).send(error);
-  }
-};
-
-export default { index, create, login, logout, getEnderecos, createEndereco };
+export default { index, create, login, logout };

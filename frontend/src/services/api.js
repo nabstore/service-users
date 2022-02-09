@@ -87,12 +87,13 @@ const logout = async () => {
 };
 
 const fetchEnderecos = async (usuarioId) => {
-  const res = await api.get(`/usuarios/${usuarioId}/enderecos`);
+  const res = await api.get(`/enderecos`, {
+    withCredentials: true,
+  });
   return res.data;
 };
 
 const createEndereco = async ({
-  usuarioId,
   logradouro,
   bairro,
   numero,
@@ -100,14 +101,23 @@ const createEndereco = async ({
   uf,
   cep,
 }) => {
-  const res = await api.post(`/usuarios/${usuarioId}/enderecos`, {
-    logradouro,
-    bairro,
-    numero,
-    cidade,
-    uf,
-    cep,
-  });
+  const res = await api.post(
+    `/enderecos`,
+    {
+      logradouro,
+      bairro,
+      numero,
+      cidade,
+      uf,
+      cep,
+    },
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      withCredentials: true,
+    }
+  );
   return res.data;
 };
 

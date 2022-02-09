@@ -6,6 +6,7 @@ const endpointsFiles = [
     './src/modules/usuarios/routes.js',
     './src/modules/compras/routes.js',
     './src/modules/cartao/routes.js',
+    './src/modules/enderecos/routes.js',
 ]
 const doc = {
     info: {

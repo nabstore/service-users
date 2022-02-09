@@ -321,84 +321,6 @@
         "responses": {}
       }
     },
-    "/usuarios/{id}/enderecos": {
-      "get": {
-        "tags": [
-          "Usuarios"
-        ],
-        "summary": "Lista os endereços de um usuário.",
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "Usuarios"
-        ],
-        "summary": "Cria um novo endereço para um usuário.",
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "obj",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "logradouro": {
-                  "example": "any"
-                },
-                "numero": {
-                  "example": "any"
-                },
-                "bairro": {
-                  "example": "any"
-                },
-                "cidade": {
-                  "example": "any"
-                },
-                "uf": {
-                  "example": "any"
-                },
-                "cep": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
     "/compras": {
       "post": {
         "tags": [
@@ -541,6 +463,77 @@
         "summary": "Retorna uma lista com todos os cartões do usuário logado",
         "description": "",
         "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/enderecos": {
+      "get": {
+        "tags": [
+          "Enderecos"
+        ],
+        "summary": "Lista os endereços de um usuário.",
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Enderecos"
+        ],
+        "summary": "Cria um novo endereço para um usuário.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "logradouro": {
+                  "example": "any"
+                },
+                "numero": {
+                  "example": "any"
+                },
+                "bairro": {
+                  "example": "any"
+                },
+                "cidade": {
+                  "example": "any"
+                },
+                "uf": {
+                  "example": "any"
+                },
+                "cep": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
