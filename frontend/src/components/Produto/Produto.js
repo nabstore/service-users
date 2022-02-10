@@ -6,6 +6,7 @@ import {
   faMinus,
   faArrowLeft,
   faTrash,
+  faTruck,
   faEdit,
 } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
@@ -15,6 +16,7 @@ import api from "../../services/api";
 import { NO_IMAGE_URL } from "../../utils/images";
 import {
   GoBackLink,
+  ValorEntrega,
   Card,
   EditButton,
   DeleteButton,
@@ -32,7 +34,7 @@ import { currencyFormat } from "../../utils/format";
 import EditProduto from "../EditProduto/EditProduto";
 import { tipoUsuario } from "../../utils/tipoUsuarioEnum";
 import "antd/dist/antd.css";
-import { notification } from 'antd';
+import { notification } from "antd";
 
 const Produto = () => {
   const { id } = useParams();
@@ -45,6 +47,21 @@ const Produto = () => {
   const [qtd, setQtd] = useState(1);
   const [produto, setProduto] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const [entrega, setEntrega] = useState();
+  const [cepEntrega, setCepEntrega] = useState("");
+
+  useEffect(() => {
+    api
+      .fetchProdutoById(id)
+      .then((produto) => {
+        setProduto(produto);
+        const prod = cart.produtos.find((prod) => prod.id === produto.id);
+        if (prod) {
+          setQtd(prod.qtd);
+        }
+      })
+      .catch((error) => console.error("Erro ao carregar produto."));
+  }, [id, cart]);
 
   const handleDelete = () => {
     if (window.confirm("Deseja deletar o produto?")) {
@@ -67,27 +84,20 @@ const Produto = () => {
       })
     );
     const args = {
-      message: 'Prontinho =)',
-      description:
-        'Produto adicionado ao carrinho.',
+      message: "Prontinho =)",
+      description: "Produto adicionado ao carrinho.",
       duration: 2,
     };
     notification.success(args);
     navigate("/");
   };
 
-  useEffect(() => {
+  const handleEstimarEntrega = () => {
     api
-      .fetchProdutoById(id)
-      .then((produto) => {
-        setProduto(produto);
-        const prod = cart.produtos.find((prod) => prod.id === produto.id);
-        if (prod) {
-          setQtd(prod.qtd);
-        }
-      })
-      .catch((error) => console.error("Erro ao carregar produto."));
-  }, [id, cart]);
+      .getEstimativaEntrega(cepEntrega)
+      .then((resp) => setEntrega(resp))
+      .catch((err) => console.error("Erro ao calcular entrega."));
+  };
 
   if (!produto) {
     return <div>Carregando dados do produto...</div>;
@@ -108,13 +118,13 @@ const Produto = () => {
       </div>
 
       <div className="row align-items-center mt-3 mb-5">
-        <div className="col d-flex justify-content-center">
+        <div className="col d-flex align-self-start mt-5 justify-content-center">
           <img
             src={api.getImageUrl(produto.id)}
             onError={(e) => (e.target.src = NO_IMAGE_URL)}
             className="img-thumbnail"
             alt={produto.nome}
-            width="60%"
+            width="80%"
           />
         </div>
         <div className="col">
@@ -185,6 +195,47 @@ const Produto = () => {
             ) : (
               <></>
             )}
+
+            <hr />
+            <div className="p-3 card-body ">
+              <DetailsTitle>Entrega</DetailsTitle>
+              <div className="p-3 card-body d-flex justify-content-center">
+                <input
+                  type="text"
+                  id="cepEntrega"
+                  className="form-control"
+                  placeholder="00000-000"
+                  value={cepEntrega}
+                  onChange={(e) => setCepEntrega(e.target.value)}
+                />
+                <EditButton
+                  className="btn btn-primary"
+                  disabled={cepEntrega === ""}
+                  onClick={handleEstimarEntrega}
+                >
+                  Calcular frete
+                </EditButton>
+              </div>
+              {entrega && entrega.estimatedDeliveryDate ? (
+                <div className="ms-3 me-3 card-body d-flex justify-content-between align-items-emd">
+                  <Details>
+                    <FontAwesomeIcon className="me-2" icon={faTruck} />
+                    Previsão de entrega dia{" "}
+                    {new Date(
+                      entrega.estimatedDeliveryDate
+                    ).toLocaleDateString()}
+                    .
+                  </Details>
+                  <ValorEntrega>
+                    {entrega.preco === 0
+                      ? "Grátis"
+                      : currencyFormat(entrega.preco)}
+                  </ValorEntrega>
+                </div>
+              ) : (
+                <></>
+              )}
+            </div>
           </Card>
         </div>
       </div>

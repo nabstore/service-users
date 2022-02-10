@@ -196,8 +196,14 @@ const fetchCompraById = async (id) => {
   return res.data;
 };
 
+const getEstimativaEntrega = async (cep) => {
+  const res = await api.get(`/entregas?cep=${cep}`);
+  return res.data;
+};
+
 const apiMethods = {
   fetchProdutos,
+  getEstimativaEntrega,
   fetchProdutoById,
   fetchCompras,
   fetchCompraById,

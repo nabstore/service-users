@@ -1,7 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = localStorage.getItem("cart")
-  ? JSON.parse(localStorage.getItem("cart"))
+const CART_KEY = "cart";
+
+const initialState = localStorage.getItem(CART_KEY)
+  ? JSON.parse(localStorage.getItem(CART_KEY))
   : {
       produtos: [],
       enderecoEscolhido: undefined,
@@ -30,7 +32,7 @@ export const cartSlicer = createSlice({
         ],
       };
 
-      localStorage.setItem("cart", JSON.stringify(newCart));
+      localStorage.setItem(CART_KEY, JSON.stringify(newCart));
 
       return newCart;
     },
@@ -42,7 +44,7 @@ export const cartSlicer = createSlice({
         ),
       };
 
-      localStorage.setItem("cart", JSON.stringify(newCart));
+      localStorage.setItem(CART_KEY, JSON.stringify(newCart));
 
       return newCart;
     },
@@ -61,7 +63,7 @@ export const cartSlicer = createSlice({
         ...state,
         enderecoEscolhido
       }
-      localStorage.setItem("cart", JSON.stringify(newState));
+      localStorage.setItem(CART_KEY, JSON.stringify(newState));
 
       return newState;
     },
@@ -79,12 +81,12 @@ export const cartSlicer = createSlice({
         ...state,
         cartaoEscolhido
       }
-      localStorage.setItem("cart", JSON.stringify(newState));
+      localStorage.setItem(CART_KEY, JSON.stringify(newState));
 
       return newState;
     },
     cleanCart: (state) => {
-      localStorage.removeItem("cart");
+      localStorage.removeItem(CART_KEY);
       return {
         produtos: [],
         enderecoEscolhido: undefined,

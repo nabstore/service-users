@@ -1,4 +1,5 @@
 import { Cartao, Compra, CompraItem, Endereco, Produto } from "../../models/index";
+import { getEstimatedDeliveryDate } from "../entregas/usecases/getEstimatedDeliveryDate";
 const { Op } = require("sequelize");
 
 const create = async (req, res) => {
@@ -9,12 +10,13 @@ const create = async (req, res) => {
   }] */
   const estimatedDeliveryDate = new Date();
   estimatedDeliveryDate.setDate(estimatedDeliveryDate.getDate() + 7)
+  const estimative = getEstimatedDeliveryDate('');
   try {
     const compra = await Compra.create({
       usuarioId: req.usuario.id,
       enderecoId: req.body.enderecoId,
       cartaoId: req.body.cartaoId,
-      estimatedDeliveryDate: estimatedDeliveryDate,
+      estimatedDeliveryDate: estimative.estimatedDeliveryDate,
     });
 
     const compraItens = req.body.produtos.map((produto) => ({
@@ -56,8 +58,7 @@ const index = async(req, res) => {
         estimatedDeliveryDate: {
           [Op.lt]: today,
         }
-      },
-      order: ['createdAt', 'DESC']
+      }
     });
     
     const compras = await Compra.findAll({ 
@@ -65,6 +66,7 @@ const index = async(req, res) => {
         usuarioId: req.usuario.id
       },
       include: [CompraItem],
+      order: [['createdAt', 'DESC']]
     });
 
     res.status(200).send(compras);

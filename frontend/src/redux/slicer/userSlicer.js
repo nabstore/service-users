@@ -1,7 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = localStorage.getItem("user")
-  ? JSON.parse(localStorage.getItem("user"))
+const USER_KEY = "user";
+
+const initialState = localStorage.getItem(USER_KEY)
+  ? JSON.parse(localStorage.getItem(USER_KEY))
   : {
       id: "",
       email: "",
@@ -23,7 +25,7 @@ export const userSlicer = createSlice({
         tipoUsuarioId: action.payload.tipoUsuarioId,
       };
 
-      localStorage.setItem("user", JSON.stringify(data));
+      localStorage.setItem(USER_KEY, JSON.stringify(data));
 
       return data;
     },

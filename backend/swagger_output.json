@@ -621,6 +621,27 @@
           }
         ]
       }
+    },
+    "/entregas": {
+      "get": {
+        "tags": [
+          "Entregas"
+        ],
+        "summary": "Calcula a estimativa de entrega para um CEP.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "cep",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   },
   "definitions": {}
