@@ -12,6 +12,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import api from "../../services/api";
 import { tipoUsuario } from "../../utils/tipoUsuarioEnum";
+import { isAuthenticated } from "../../services/auth";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -71,7 +72,7 @@ const Header = () => {
                   <FontAwesomeIcon className="ms-2" icon={faShoppingCart} />
                 </Link>
               </li>
-              {!user.logado ? (
+              {!isAuthenticated() ? (
                 <>
                   <li className="nav-item">
                     <Link className="nav-link" to="/login">

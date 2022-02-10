@@ -25,6 +25,7 @@ import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import "antd/dist/antd.css";
 import { notification } from "antd";
+import { isAuthenticated } from "../../services/auth";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -53,7 +54,7 @@ const Cart = () => {
   }, []);
 
   const handleComprar = () => {
-    if (user.logado) {
+    if (isAuthenticated()) {
       navigate("/cartoes");
     } else {
       navigate("/login");

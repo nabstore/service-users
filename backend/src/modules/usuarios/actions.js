@@ -1,6 +1,6 @@
 import { Usuario, TipoUsuario } from "../../models/index";
 import bcrypt from "bcrypt";
-import jwt from 'jsonwebtoken';
+import jwt from "jsonwebtoken";
 
 const index = async (req, res) => {
   // #swagger.tags = ['Usuarios']
@@ -63,22 +63,25 @@ const login = async (req, res) => {
     if (usuario) {
       bcrypt.compare(req.body.senha, usuario.senha, (err, ok) => {
         if (ok) {
-          const token = jwt.sign({ usuario }, process.env.JWT_SECRET, {
-            expiresIn: 86400 // expires in 24h
-          });
           const usuarioData = {
             id: usuario.id,
             tipoUsuarioId: usuario.tipoUsuarioId,
             nome: usuario.nome,
-            email: usuario.email,
-          }
+          };
+          const token = jwt.sign(
+            { usuario: usuarioData },
+            process.env.JWT_SECRET,
+            {
+              expiresIn: 86400, // expires in 24h
+            }
+          );
           res.status(200).send({ token, usuario: usuarioData });
         } else {
-          res.status(401).send({ error: "Email e/ou senha inválido(s)." });
+          res.status(400).send({ error: "Email e/ou senha inválido(s)." });
         }
       });
     } else {
-      res.status(401).send({ error: "Email e/ou senha inválido(s)sss." });
+      res.status(400).send({ error: "Email e/ou senha inválido(s)sss." });
     }
   } catch (error) {
     res.status(500).send(error);

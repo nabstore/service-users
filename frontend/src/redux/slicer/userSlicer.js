@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { tipoUsuario } from "../../utils/tipoUsuarioEnum";
 
 const USER_KEY = "user";
 
@@ -6,10 +7,8 @@ const initialState = localStorage.getItem(USER_KEY)
   ? JSON.parse(localStorage.getItem(USER_KEY))
   : {
       id: "",
-      email: "",
       nome: "",
-      logado: false,
-      tipoUsuarioId: "visitante",
+      tipoUsuarioId: tipoUsuario.CLIENTE,
     };
 
 export const userSlicer = createSlice({
@@ -19,9 +18,7 @@ export const userSlicer = createSlice({
     login: (state, action) => {
       const data = {
         id: action.payload.id,
-        email: action.payload.email,
         nome: action.payload.nome,
-        logado: true,
         tipoUsuarioId: action.payload.tipoUsuarioId,
       };
 
@@ -32,7 +29,11 @@ export const userSlicer = createSlice({
     logout: (state) => {
       localStorage.clear();
       
-      return initialState;
+      return {
+        id: "",
+        nome: "",
+        tipoUsuarioId: tipoUsuario.CLIENTE,
+      };
     },
   },
 });
