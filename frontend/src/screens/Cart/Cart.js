@@ -20,9 +20,8 @@ import Anchor from "../../components/Anchor";
 const Cart = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { user, cart } = useSelector((state) => ({
+  const { cart } = useSelector((state) => ({
     cart: state.cart,
-    user: state.user,
   }));
   const [total, setTotal] = useState(0);
   const [ofertas, setOfertas] = useState();
