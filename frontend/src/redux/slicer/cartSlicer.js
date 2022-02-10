@@ -85,7 +85,11 @@ export const cartSlicer = createSlice({
     },
     cleanCart: (state) => {
       localStorage.removeItem("cart");
-      return initialState;
+      return {
+        produtos: [],
+        enderecoEscolhido: undefined,
+        cartaoEscolhido: undefined,
+      };
     },
   },
 });

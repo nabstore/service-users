@@ -6,6 +6,7 @@ import uploadFileMiddleware from "../../middlewares/uploadFile";
 const router = express.Router();
 
 router.get("/produtos", produtosActions.index);
+router.get("/produtos/ofertas", produtosActions.offers);
 router.post(
   "/produtos",
   authUtils.verifyAuth,

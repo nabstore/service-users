@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import { SubmitButton } from "../AddProduto/styles";
+import { notification } from 'antd';
 
 const Checkout = () => {
   const { user, cart } = useSelector((state) => ({
@@ -40,12 +41,24 @@ const Checkout = () => {
         })),
       })
       .then((resp) => {
-        alert("Compra realizada com sucesso!");
+        const args = {
+          message: 'OBRIGADO',
+          description:
+            'Compra realizada com sucesso!',
+          duration: 2,
+        };
+        notification.success(args);
         dispatch(cleanCart());
         navigate("/");
       })
       .catch((err) => {
-        alert("Erro ao realizar compra.");
+        const args = {
+          message: 'Oops...',
+          description:
+            'Erro ao finalizar compra.',
+          duration: 2,
+        };
+        notification.error(args);
       });
   };
 

@@ -18,6 +18,11 @@ const fetchProdutos = async (page) => {
   return res.data;
 };
 
+const fetchOfertas = async () => {
+  const res = await api.get(`produtos/ofertas`);
+  return res.data;
+};
+
 const fetchProdutoById = async (id) => {
   const res = await api.get(`/produtos/${id}`);
   return res.data;
@@ -198,6 +203,7 @@ const apiMethods = {
   fetchCompraById,
   createProduto,
   createCartao,
+  fetchOfertas,
   fetchCartoes,
   editProduto,
   deleteProduto,

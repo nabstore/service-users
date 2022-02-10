@@ -16,6 +16,20 @@ const index = async (req, res) => {
   }
 };
 
+const offers = async (req, res) => {
+  // #swagger.tags = ['Produtos']
+  // #swagger.summary = 'Retorna uma lista com os três produtos mais baratos.'
+  try {
+    const produtos = await Produto.findAll({
+      order: [['preco', 'DESC']],
+      limit: 4,
+    });
+    res.status(200).send(produtos);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
+
 const create = async (req, res, next) => {
   // #swagger.tags = ['Produtos']
   // #swagger.summary = 'Cria um novo produto.'
@@ -141,4 +155,4 @@ const getImage = (req, res) => {
   res.sendFile(`/usr/app/public/uploads/${produtoId}/image.png`);
 };
 
-export default { index, create, read, update, del, getImage };
+export default { index, create, read, update, del, getImage, offers };

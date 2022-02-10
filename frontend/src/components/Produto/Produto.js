@@ -31,6 +31,7 @@ import {
 import { currencyFormat } from "../../utils/format";
 import EditProduto from "../EditProduto/EditProduto";
 import { tipoUsuario } from "../../utils/tipoUsuarioEnum";
+import { notification } from 'antd';
 
 const Produto = () => {
   const { id } = useParams();
@@ -64,7 +65,13 @@ const Produto = () => {
         nome: produto.nome,
       })
     );
-    alert("Produto adicionado ao carrinho");
+    const args = {
+      message: 'Prontinho =)',
+      description:
+        'Produto adicionado ao carrinho.',
+      duration: 2,
+    };
+    notification.success(args);
     navigate("/");
   };
 
