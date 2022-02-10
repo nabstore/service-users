@@ -18,13 +18,6 @@ const ViewDetailsLink = styled(Link)`
   line-height: 33px;
 `;
 
-const Title = styled.h1`
-  font-size: 36px;
-  font-weight: 800;
-  color: #2f2f2f;
-  font-family: Open Sans;
-`;
-
 const NoProdutosText = styled.h1`
   font-size: 24px;
   font-weight: 800;
@@ -40,7 +33,6 @@ const ProdutosContainer = styled.div`
 export {
   Card,
   ViewDetailsLink,
-  Title,
   ProdutosContainer,
   NoProdutosText,
 };

@@ -1,12 +1,5 @@
 import styled from "styled-components";
 
-const Title = styled.h1`
-  font-size: 36px;
-  font-weight: 800;
-  color: #2f2f2f;
-  font-family: Open Sans;
-`;
-
 const Card = styled.div`
   width: 80%;
   margin: 10px;
@@ -51,7 +44,6 @@ const Total = styled.span`
 `;
 
 export {
-  Title,
   Card,
   ProdutoTitle,
   Info,

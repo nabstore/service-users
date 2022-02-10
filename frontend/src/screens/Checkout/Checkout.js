@@ -3,14 +3,15 @@ import { currencyFormat } from "../../utils/format";
 import api from "../../services/api";
 import { cleanCart } from "../../redux/slicer/cartSlicer";
 import { useNavigate } from "react-router";
-import { Card, Info, Title, Value } from "./styles";
+import { Card, Info, Value } from "./styles";
 import { GoBackLink } from "../Produto/styles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import "antd/dist/antd.css";
-import { notification } from 'antd';
+import { notification } from "antd";
 import Button from "../../components/Button";
+import Typography from "../../components/Typografy";
 
 const Checkout = () => {
   const { user, cart } = useSelector((state) => ({
@@ -44,9 +45,8 @@ const Checkout = () => {
       })
       .then((resp) => {
         const args = {
-          message: 'OBRIGADO',
-          description:
-            'Compra realizada com sucesso!',
+          message: "OBRIGADO",
+          description: "Compra realizada com sucesso!",
           duration: 2,
         };
         notification.success(args);
@@ -55,9 +55,8 @@ const Checkout = () => {
       })
       .catch((err) => {
         const args = {
-          message: 'Oops...',
-          description:
-            'Erro ao finalizar compra.',
+          message: "Oops...",
+          description: "Erro ao finalizar compra.",
           duration: 2,
         };
         notification.error(args);
@@ -71,12 +70,14 @@ const Checkout = () => {
       </GoBackLink>
 
       <div className="d-flex justify-content-center">
-        <Title>Confirmar Compra</Title>
+        <Typography.Title>Confirmar Compra</Typography.Title>
       </div>
 
       <div className="d-flex flex-row">
         <Card className="card" style={{ width: "60%" }}>
-          <h3>Produtos</h3>
+          <Typography.Subtitle className="m-2 mb-4" bold>
+            Produtos
+          </Typography.Subtitle>
           {cart.produtos.map((prod) => (
             <div
               className="d-flex flex-row justify-content-between p-2"
@@ -115,11 +116,15 @@ const Checkout = () => {
               {currencyFormat(total)}
             </Value>
           </div>
-          <Button.Secondary onClick={handleComprar}>Finalizar Compra</Button.Secondary>
+          <Button.Secondary onClick={handleComprar}>
+            Finalizar Compra
+          </Button.Secondary>
         </Card>
 
         <Card className="card" style={{ width: "40%", height: "50%" }}>
-          <h3>Entrega</h3>
+          <Typography.Subtitle className="m-2 mb-4" bold>
+            Entrega
+          </Typography.Subtitle>
           <Info>
             {cart.enderecoEscolhido?.logradouro},{" "}
             {cart.enderecoEscolhido?.bairro} - {cart.enderecoEscolhido?.numero}

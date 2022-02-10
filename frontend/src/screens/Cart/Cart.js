@@ -8,7 +8,7 @@ import {
 import { currencyFormat } from "../../utils/format";
 import api from "../../services/api";
 import { NO_IMAGE_URL } from "../../utils/images";
-import { Title, Card, ProdutoTitle, Info, Total, Value } from "./styles";
+import { Card, ProdutoTitle, Info, Total, Value } from "./styles";
 import { GoBackLink } from "../Produto/styles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
@@ -17,6 +17,7 @@ import "antd/dist/antd.css";
 import { notification } from "antd";
 import { isAuthenticated } from "../../services/auth";
 import Button from "../../components/Button";
+import Typography from "../../components/Typografy";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -86,7 +87,7 @@ const Cart = () => {
       </GoBackLink>
 
       <div className="d-flex justify-content-center">
-        <Title>Meu Carrinho</Title>
+        <Typography.Title>Meu Carrinho</Typography.Title>
       </div>
 
       {cart.produtos.length === 0 ? (
@@ -169,7 +170,7 @@ const Cart = () => {
       {ofertas && ofertas.length > 0 ? (
         <div className="mt-5">
           <hr className="mb-5" />
-          <Title>Melhores Ofertas</Title>
+          <Typography.Title>Melhores Ofertas</Typography.Title>
           <div className="d-flex flex-row justify-content-center mb-5">
             {ofertas.map((produto) => (
               <Card

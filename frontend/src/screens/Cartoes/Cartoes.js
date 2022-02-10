@@ -6,10 +6,10 @@ import { faArrowLeft, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 import { selectCartao } from "../../redux/slicer/cartSlicer";
 import api from "../../services/api";
 import { GoBackLink } from "../Produto/styles";
-import { Title } from "../Cart/styles";
 import { Data, Label, CardTitle, Card } from "./styles";
 import AddCartao from "../AddCartao/AddCartao";
 import Button from "../../components/Button";
+import Typography from "../../components/Typografy";
 
 const Cartoes = () => {
   const dispatch = useDispatch();
@@ -47,7 +47,7 @@ const Cartoes = () => {
       </div>
 
       <div className="d-flex justify-content-center mt-4">
-        <Title>Cartões</Title>
+        <Typography.Title>Cartões</Typography.Title>
       </div>
 
       <div className="d-flex flex-column align-items-center mb-5">

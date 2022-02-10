@@ -6,10 +6,10 @@ import { faArrowLeft, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 import { selectEndereco } from "../../redux/slicer/cartSlicer";
 import api from "../../services/api";
 import { GoBackLink } from "../Produto/styles";
-import { Title } from "../Cart/styles";
 import { Data, Label, CardTitle, Card } from "./styles";
 import AddEndereco from "../AddEndereco/AddEndereco";
 import Button from "../../components/Button";
+import Typography from "../../components/Typografy";
 
 const Enderecos = () => {
   const dispatch = useDispatch();
@@ -47,7 +47,7 @@ const Enderecos = () => {
       </div>
 
       <div className="d-flex justify-content-center mt-4">
-        <Title>Endereços</Title>
+        <Typography.Title>Endereços</Typography.Title>
       </div>
 
       <div className="d-flex flex-column align-items-center mb-5">

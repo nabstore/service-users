@@ -20,24 +20,6 @@ const Card = styled.div`
   padding: 20px 30px;
 `;
 
-const Title = styled.h1`
-  font-family: Open Sans;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 36px;
-  color: #3a3a3a;
-`;
-
-const Subtitle = styled.h2`
-  font-family: Open Sans;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 24px;
-  line-height: 10px;
-  letter-spacing: -0.04em;
-  color: #7e7e7e;
-`;
-
 const DetailsTitle = styled.h2`
   font-family: Open Sans;
   font-style: normal;
@@ -96,8 +78,6 @@ export {
   Card,
   Price,
   Estoque,
-  Title,
-  Subtitle,
   Details,
   DetailsTitle,
 };

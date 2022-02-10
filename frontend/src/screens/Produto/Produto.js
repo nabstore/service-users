@@ -20,8 +20,6 @@ import {
   Card,
   Price,
   Estoque,
-  Subtitle,
-  Title,
   Details,
   DetailsTitle,
 } from "./styles";
@@ -31,6 +29,7 @@ import { tipoUsuario } from "../../utils/tipoUsuarioEnum";
 import "antd/dist/antd.css";
 import { notification } from "antd";
 import Button from "../../components/Button";
+import Typography from "../../components/Typografy";
 
 const Produto = () => {
   const { id } = useParams();
@@ -126,8 +125,8 @@ const Produto = () => {
         <div className="col">
           <Card className="card">
             <div className="card-body">
-              <Title className="card-title">{produto.nome}</Title>
-              <Subtitle className="card-text">ID: {produto.id}</Subtitle>
+              <Typography.Title>{produto.nome}</Typography.Title>
+              <Typography.Subtitle color="#7e7e7e">ID: {produto.id}</Typography.Subtitle>
             </div>
 
             <hr />
