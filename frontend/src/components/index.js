@@ -12,3 +12,4 @@ export { default as Enderecos } from "./Enderecos/Enderecos";
 export { default as Cartoes } from "./Cartoes/Cartoes";
 export { default as AddEndereco } from "./AddEndereco/AddEndereco";
 export { default as Checkout } from "./Checkout/Checkout";
+export { default as Compras } from "./Compras/Compras";

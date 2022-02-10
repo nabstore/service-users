@@ -8,7 +8,7 @@ const create = async (req, res) => {
       "bearerAuth": []
   }] */
   const estimatedDeliveryDate = new Date();
-  estimatedDeliveryDate.setDate(estimatedDeliveryDate.getDate() - 7)
+  estimatedDeliveryDate.setDate(estimatedDeliveryDate.getDate() + 7)
   try {
     const compra = await Compra.create({
       usuarioId: req.usuario.id,

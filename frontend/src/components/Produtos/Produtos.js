@@ -95,7 +95,7 @@ const Produtos = () => {
   };
 
   const UltimasCompras = () => {
-    if (!compras) {
+    if (!compras || compras.length === 0) {
       return <></>;
     }
 
@@ -123,12 +123,6 @@ const Produtos = () => {
         <div className="d-flex flex-wrap mt-3 justify-content-center">
           {compras.slice(0, 4).map((compra) => (
             <Card style={{ width: "16rem" }} className="card" key={compra.id}>
-              <img
-                className="card-img-top"
-                src={api.getImageUrl(compra.CompraItems[0].id)}
-                onError={(e) => (e.target.src = NO_IMAGE_URL)}
-                alt={compra.CompraItems.nome}
-              />
               <div className="card-body">
                 <h5 className="card-title">
                   Feita em {new Date(compra.createdAt).toLocaleDateString()}
