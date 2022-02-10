@@ -13,7 +13,7 @@ import {
   Produtos,
   Signup,
   Sobre,
-} from "./components";
+} from "./screens";
 
 function App() {
   return (
