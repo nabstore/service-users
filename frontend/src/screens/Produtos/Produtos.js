@@ -4,7 +4,6 @@ import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
 import {
   Card,
-  ViewDetailsLink,
   ProdutosContainer,
   NoProdutosText,
 } from "./styles";
@@ -16,6 +15,7 @@ import { tipoUsuario } from "../../utils/tipoUsuarioEnum";
 import { currencyFormat } from "../../utils/format";
 import Button from "../../components/Button";
 import Typography from "../../components/Typografy";
+import Anchor from "../../components/Anchor";
 
 const Produtos = () => {
   const [produtos, setProdutos] = useState(null);
@@ -85,9 +85,9 @@ const Produtos = () => {
         </div>
         <ul className="list-group list-group-flush">
           <li className="list-group-item d-flex justify-content-center">
-            <ViewDetailsLink to={`/produto/${produto.id}`}>
+            <Anchor.Primary to={`/produto/${produto.id}`}>
               Ver detalhes
-            </ViewDetailsLink>
+            </Anchor.Primary>
           </li>
         </ul>
       </Card>
@@ -118,9 +118,9 @@ const Produtos = () => {
       <div className="d-flex flex-column justify-content-center mb-4">
         <div className="d-flex flex-row align-items-center">
           <Typography.Title className="float-start">Últimas Compras</Typography.Title>
-          <ViewDetailsLink className="ms-4" to={`/compras`}>
+          <Anchor.Primary className="ms-4" to={`/compras`}>
             Ver todas
-          </ViewDetailsLink>
+          </Anchor.Primary>
         </div>
         <div className="d-flex flex-wrap mt-3 justify-content-start">
           {compras.slice(0, 4).map((compra) => (
@@ -134,9 +134,9 @@ const Produtos = () => {
               </div>
               <ul className="list-group list-group-flush">
                 <li className="list-group-item d-flex justify-content-center">
-                  <ViewDetailsLink to={`/compras/${compra.id}`}>
+                  <Anchor.Primary to={`/compras/${compra.id}`}>
                     Ver detalhes
-                  </ViewDetailsLink>
+                  </Anchor.Primary>
                 </li>
               </ul>
             </Card>

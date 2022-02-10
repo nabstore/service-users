@@ -1,13 +1,11 @@
 import { currencyFormat } from "../../utils/format";
 import api from "../../services/api";
 import { Card, Info, Title, Value } from "./styles";
-import { GoBackLink } from "../Produto/styles";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import "antd/dist/antd.css";
 import { useParams } from "react-router";
 import LoadingIcons from "react-loading-icons";
+import Anchor from "../../components/Anchor";
 
 const Checkout = () => {
   const { id } = useParams();
@@ -34,8 +32,12 @@ const Checkout = () => {
               className="d-flex flex-row justify-content-between p-2"
               key={prod.id}
             >
-              <Info>{prod.quantidade}x {prod.Produto.nome}</Info>
-              <Value bold>{currencyFormat(prod.quantidade * prod.Produto.preco)}</Value>
+              <Info>
+                {prod.quantidade}x {prod.Produto.nome}
+              </Info>
+              <Value bold>
+                {currencyFormat(prod.quantidade * prod.Produto.preco)}
+              </Value>
             </div>
           ))}
 
@@ -49,7 +51,7 @@ const Checkout = () => {
           </div>
 
           <hr />
-          
+
           <div className="mt-3 mb-3 d-flex align-items-center flex-row justify-content-between">
             <Info style={{ color: "#2f2f2f" }}>Valor total:</Info>
             <Value bold style={{ fontSize: 32 }}>
@@ -102,9 +104,7 @@ const Checkout = () => {
 
   return (
     <div className="container">
-      <GoBackLink to="/compras">
-        <FontAwesomeIcon icon={faArrowLeft} /> Voltar às compras
-      </GoBackLink>
+      <Anchor.GoBack path="/compras" text="Voltar às compras" />
 
       <div className="d-flex justify-content-center">
         <Title>Detalhes de Compra</Title>

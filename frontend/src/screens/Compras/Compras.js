@@ -1,18 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import api from "../../services/api";
-import {
-  Title,
-  Card,
-  ProdutoTitle,
-  Info,
-  Value,
-} from "./styles";
-import { GoBackLink } from "../Produto/styles";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { Title, Card, ProdutoTitle, Info, Value } from "./styles";
 import { useEffect, useState } from "react";
 import LoadingIcons from "react-loading-icons";
 import { currencyFormat } from "../../utils/format";
+import Anchor from "../../components/Anchor";
 
 const Compras = () => {
   const navigate = useNavigate();
@@ -36,9 +28,7 @@ const Compras = () => {
 
   return (
     <div className="container">
-      <GoBackLink to="/">
-        <FontAwesomeIcon icon={faArrowLeft} /> Voltar aos produtos
-      </GoBackLink>
+      <Anchor.GoBack path="/" text="Voltar aos produtos" />
 
       <div className="d-flex justify-content-center">
         <Title>Minhas Compras</Title>

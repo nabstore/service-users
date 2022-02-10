@@ -9,15 +9,13 @@ import { currencyFormat } from "../../utils/format";
 import api from "../../services/api";
 import { NO_IMAGE_URL } from "../../utils/images";
 import { Card, ProdutoTitle, Info, Total, Value } from "./styles";
-import { GoBackLink } from "../Produto/styles";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import "antd/dist/antd.css";
 import { notification } from "antd";
 import { isAuthenticated } from "../../services/auth";
 import Button from "../../components/Button";
 import Typography from "../../components/Typografy";
+import Anchor from "../../components/Anchor";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -82,9 +80,7 @@ const Cart = () => {
 
   return (
     <div className="container">
-      <GoBackLink to="/">
-        <FontAwesomeIcon icon={faArrowLeft} /> Voltar aos produtos
-      </GoBackLink>
+      <Anchor.GoBack path="/" text="Voltar aos produtos" />
 
       <div className="d-flex justify-content-center">
         <Typography.Title>Meu Carrinho</Typography.Title>

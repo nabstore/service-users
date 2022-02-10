@@ -1,16 +1,4 @@
-import { Link } from "react-router-dom";
 import styled from "styled-components";
-
-const GoBackLink = styled(Link)`
-  font-family: Open Sans;
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 33px;
-  letter-spacing: 0em;
-  text-align: left;
-  color: #212223;
-`;
 
 const Card = styled.div`
   width: 100%;
@@ -73,7 +61,6 @@ const ValorEntrega = styled.p`
 `;
 
 export {
-  GoBackLink,
   ValorEntrega,
   Card,
   Price,

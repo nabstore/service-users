@@ -2,14 +2,14 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
+import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 import { selectEndereco } from "../../redux/slicer/cartSlicer";
 import api from "../../services/api";
-import { GoBackLink } from "../Produto/styles";
 import { Data, Label, CardTitle, Card } from "./styles";
 import AddEndereco from "../AddEndereco/AddEndereco";
 import Button from "../../components/Button";
 import Typography from "../../components/Typografy";
+import Anchor from "../../components/Anchor";
 
 const Enderecos = () => {
   const dispatch = useDispatch();
@@ -31,14 +31,12 @@ const Enderecos = () => {
 
   return (
     <div className="container">
-      <AddEndereco 
-        handleClose={() => setShowModal(false)} 
-        showModal={showModal} 
+      <AddEndereco
+        handleClose={() => setShowModal(false)}
+        showModal={showModal}
       />
 
-      <GoBackLink to="/cartoes">
-        <FontAwesomeIcon icon={faArrowLeft} /> Voltar aos cartões
-      </GoBackLink>
+      <Anchor.GoBack path="/cartoes" text="Voltar aos cartões" />
 
       <div className="float-end">
         <Button.Primary onClick={() => setShowModal(true)}>

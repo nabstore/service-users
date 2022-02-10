@@ -4,14 +4,12 @@ import api from "../../services/api";
 import { cleanCart } from "../../redux/slicer/cartSlicer";
 import { useNavigate } from "react-router";
 import { Card, Info, Value } from "./styles";
-import { GoBackLink } from "../Produto/styles";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import "antd/dist/antd.css";
 import { notification } from "antd";
 import Button from "../../components/Button";
 import Typography from "../../components/Typografy";
+import Anchor from "../../components/Anchor";
 
 const Checkout = () => {
   const { user, cart } = useSelector((state) => ({
@@ -65,9 +63,7 @@ const Checkout = () => {
 
   return (
     <div className="container">
-      <GoBackLink to="/enderecos">
-        <FontAwesomeIcon icon={faArrowLeft} /> Voltar aos endereços
-      </GoBackLink>
+      <Anchor.GoBack path="/enderecos" text="Voltar aos endereços" />
 
       <div className="d-flex justify-content-center">
         <Typography.Title>Confirmar Compra</Typography.Title>

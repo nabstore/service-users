@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPlus,
   faMinus,
-  faArrowLeft,
   faTrash,
   faTruck,
   faEdit,
@@ -15,7 +14,6 @@ import { addProduto } from "../../redux/slicer/cartSlicer";
 import api from "../../services/api";
 import { NO_IMAGE_URL } from "../../utils/images";
 import {
-  GoBackLink,
   ValorEntrega,
   Card,
   Price,
@@ -30,6 +28,7 @@ import "antd/dist/antd.css";
 import { notification } from "antd";
 import Button from "../../components/Button";
 import Typography from "../../components/Typografy";
+import Anchor from "../../components/Anchor";
 
 const Produto = () => {
   const { id } = useParams();
@@ -106,9 +105,7 @@ const Produto = () => {
       />
       <div className="col">
         <div className="float-start">
-          <GoBackLink to="/">
-            <FontAwesomeIcon icon={faArrowLeft} /> Voltar aos produtos
-          </GoBackLink>
+          <Anchor.GoBack path="/" text="Voltar aos produtos" />
         </div>
       </div>
 

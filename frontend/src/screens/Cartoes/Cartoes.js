@@ -2,14 +2,14 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
+import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 import { selectCartao } from "../../redux/slicer/cartSlicer";
 import api from "../../services/api";
-import { GoBackLink } from "../Produto/styles";
 import { Data, Label, CardTitle, Card } from "./styles";
 import AddCartao from "../AddCartao/AddCartao";
 import Button from "../../components/Button";
 import Typography from "../../components/Typografy";
+import Anchor from "../../components/Anchor";
 
 const Cartoes = () => {
   const dispatch = useDispatch();
@@ -36,9 +36,7 @@ const Cartoes = () => {
         showModal={showModal} 
       />
 
-      <GoBackLink to="/cart">
-        <FontAwesomeIcon icon={faArrowLeft} /> Voltar ao carrinho
-      </GoBackLink>
+      <Anchor.GoBack path="/cart" text="Voltar ao carrinho" />
 
       <div className="float-end">
         <Button.Primary onClick={() => setShowModal(true)}>
