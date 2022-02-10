@@ -16,6 +16,7 @@ import { NO_IMAGE_URL } from "../../utils/images";
 import LoadingIcons from "react-loading-icons";
 import AddProduto from "../AddProduto/AddProduto";
 import { tipoUsuario } from "../../utils/tipoUsuarioEnum";
+import { currencyFormat } from "../../utils/format";
 
 const Produtos = () => {
   const [produtos, setProdutos] = useState(null);
@@ -118,15 +119,18 @@ const Produtos = () => {
       <div className="d-flex flex-column justify-content-center mb-4">
         <div className="d-flex flex-row align-items-center">
           <Title className="float-start">Últimas Compras</Title>
-          <ViewDetailsLink className="ms-4" to={`/compras`}>Ver todas</ViewDetailsLink>
+          <ViewDetailsLink className="ms-4" to={`/compras`}>
+            Ver todas
+          </ViewDetailsLink>
         </div>
-        <div className="d-flex flex-wrap mt-3 justify-content-center">
+        <div className="d-flex flex-wrap mt-3 justify-content-start">
           {compras.slice(0, 4).map((compra) => (
             <Card style={{ width: "16rem" }} className="card" key={compra.id}>
               <div className="card-body">
                 <h5 className="card-title">
                   Feita em {new Date(compra.createdAt).toLocaleDateString()}
                 </h5>
+                <h1 className="card-title">{currencyFormat(compra.total)}</h1>
                 {dadosDaEntrega(compra)}
               </div>
               <ul className="list-group list-group-flush">

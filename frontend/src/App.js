@@ -4,6 +4,7 @@ import {
   Cart,
   Cartoes,
   Checkout,
+  Compra,
   Compras,
   Enderecos,
   Header,
@@ -31,6 +32,7 @@ function App() {
           <Route path="/cartoes" exact element={<Cartoes />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/compras" element={<Compras />} />
+          <Route path="/compras/:id" element={<Compra />} />
         </Routes>
       </div>
     </BrowserRouter>

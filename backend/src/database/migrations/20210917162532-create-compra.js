@@ -14,6 +14,9 @@ module.exports = {
       enderecoId: {
         type: Sequelize.INTEGER
       },
+      total: {
+        type: Sequelize.FLOAT
+      },
       deliveredAt: {
         allowNull: true,
         type: Sequelize.DATE

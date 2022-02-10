@@ -5,7 +5,6 @@ import {
   Card,
   ProdutoTitle,
   Info,
-  VerMaisButton,
   Value,
 } from "./styles";
 import { GoBackLink } from "../Produto/styles";
@@ -13,6 +12,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import LoadingIcons from "react-loading-icons";
+import { currencyFormat } from "../../utils/format";
 
 const Compras = () => {
   const navigate = useNavigate();
@@ -58,7 +58,7 @@ const Compras = () => {
                 onClick={() => handleVerDetalhes(compra.id)}
               >
                 <ProdutoTitle className="card-title">
-                  Compra do dia{" "}
+                  Comprou {currencyFormat(compra.total)} no dia{" "}
                   {new Date(compra.createdAt).toLocaleDateString()}
                 </ProdutoTitle>
                 <div className="d-flex flex-row justify-content-around mt-3">

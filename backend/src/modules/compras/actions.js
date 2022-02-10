@@ -1,4 +1,10 @@
-import { Cartao, Compra, CompraItem, Endereco, Produto } from "../../models/index";
+import {
+  Cartao,
+  Compra,
+  CompraItem,
+  Endereco,
+  Produto,
+} from "../../models/index";
 import { getEstimatedDeliveryDate } from "../entregas/usecases/getEstimatedDeliveryDate";
 const { Op } = require("sequelize");
 
@@ -9,14 +15,19 @@ const create = async (req, res) => {
       "bearerAuth": []
   }] */
   const estimatedDeliveryDate = new Date();
-  estimatedDeliveryDate.setDate(estimatedDeliveryDate.getDate() + 7)
-  const estimative = getEstimatedDeliveryDate('');
+  estimatedDeliveryDate.setDate(estimatedDeliveryDate.getDate() + 7);
+  const estimative = getEstimatedDeliveryDate("");
   try {
+    const total = req.body.produtos.reduce(
+      (prev, atual) => prev + atual.quantidade * atual.precoUnit,
+      0
+    );
     const compra = await Compra.create({
       usuarioId: req.usuario.id,
       enderecoId: req.body.enderecoId,
       cartaoId: req.body.cartaoId,
       estimatedDeliveryDate: estimative.estimatedDeliveryDate,
+      total,
     });
 
     const compraItens = req.body.produtos.map((produto) => ({
@@ -44,7 +55,7 @@ const create = async (req, res) => {
   }
 };
 
-const index = async(req, res) => {
+const index = async (req, res) => {
   // #swagger.tags = ['Compras']
   // #swagger.summary = 'Retorna uma lista com todas as compras do usuário logado'
   /* #swagger.security = [{
@@ -53,20 +64,23 @@ const index = async(req, res) => {
   try {
     // Realiza a entrega de compras cuja entrega estimada já foi alcançada
     const today = new Date();
-    await Compra.update({ deliveredAt: today }, {
-      where: {
-        estimatedDeliveryDate: {
-          [Op.lt]: today,
-        }
+    await Compra.update(
+      { deliveredAt: today },
+      {
+        where: {
+          estimatedDeliveryDate: {
+            [Op.lt]: today,
+          },
+        },
       }
-    });
-    
-    const compras = await Compra.findAll({ 
+    );
+
+    const compras = await Compra.findAll({
       where: {
-        usuarioId: req.usuario.id
+        usuarioId: req.usuario.id,
       },
       include: [CompraItem],
-      order: [['createdAt', 'DESC']]
+      order: [["createdAt", "DESC"]],
     });
 
     res.status(200).send(compras);
@@ -88,7 +102,14 @@ const read = async (req, res) => {
         usuarioId: req.usuario.id,
         id,
       },
-      include: [Cartao, CompraItem, Endereco],
+      include: [
+        Cartao,
+        Endereco,
+        {
+          model: CompraItem,
+          include: [Produto],
+        },
+      ],
     });
 
     if (!compra) {

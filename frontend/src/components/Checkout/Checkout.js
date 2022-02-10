@@ -39,6 +39,7 @@ const Checkout = () => {
         produtos: cart.produtos.map((prod) => ({
           produtoId: prod.id,
           quantidade: prod.qtd,
+          precoUnit: prod.precoUnit,
         })),
       })
       .then((resp) => {

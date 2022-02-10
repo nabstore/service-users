@@ -17,6 +17,7 @@ module.exports = (sequelize, DataTypes) => {
   Compra.init(
     {
       usuarioId: DataTypes.INTEGER,
+      total: DataTypes.FLOAT,
       enderecoId: DataTypes.INTEGER,
       cartaoId: DataTypes.INTEGER,
       deliveredAt: DataTypes.DATE,
