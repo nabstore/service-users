@@ -1,7 +1,16 @@
 import axios from "axios";
+import { getToken, login as authLogin, logout as authLogout } from "./auth";
 
 const api = axios.create({
   baseURL: process.env.REACT_APP_API,
+});
+
+api.interceptors.request.use(async (config) => {
+  const token = getToken();
+  if (token) {
+    config.headers.authorization = token;
+  }
+  return config;
 });
 
 const fetchProdutos = async (page) => {
@@ -19,7 +28,6 @@ const createProduto = async (formData) => {
     headers: {
       "Content-Type": "multipart/form-data",
     },
-    withCredentials: true,
   });
   return res.data;
 };
@@ -62,7 +70,6 @@ const deleteProduto = async (id) => {
     headers: {
       "Content-Type": "application/json",
     },
-    withCredentials: true,
   });
   return res.data;
 };
@@ -78,18 +85,18 @@ const login = async ({ email, password }) => {
       withCredentials: true,
     }
   );
-  return res.data;
+  authLogin(res.data.token);
+  return res.data.usuario;
 };
 
 const logout = async () => {
   const res = await api.get(`/logout`);
+  authLogout();
   return res.data;
 };
 
 const fetchEnderecos = async () => {
-  const res = await api.get(`/enderecos`, {
-    withCredentials: true,
-  });
+  const res = await api.get(`/enderecos`);
   return res.data;
 };
 
@@ -170,23 +177,17 @@ const createCartao = async ({ number, apelido, validade, cvv, titular }) => {
 };
 
 const fetchCartoes = async () => {
-  const res = await api.get(`/cartao`, {
-    withCredentials: true,
-  });
+  const res = await api.get(`/cartao`);
   return res.data;
 };
 
 const fetchCompras = async () => {
-  const res = await api.get(`/compras`, {
-    withCredentials: true,
-  });
+  const res = await api.get(`/compras`);
   return res.data;
 };
 
 const fetchCompraById = async (id) => {
-  const res = await api.get(`/compras/${id}`, {
-    withCredentials: true,
-  });
+  const res = await api.get(`/compras/${id}`);
   return res.data;
 };
 

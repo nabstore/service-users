@@ -1,5 +1,6 @@
 import { Usuario, TipoUsuario } from "../../models/index";
 import bcrypt from "bcrypt";
+import jwt from 'jsonwebtoken';
 
 const index = async (req, res) => {
   // #swagger.tags = ['Usuarios']
@@ -62,9 +63,16 @@ const login = async (req, res) => {
     if (usuario) {
       bcrypt.compare(req.body.senha, usuario.senha, (err, ok) => {
         if (ok) {
-          req.session.userId = usuario.id;
-          req.session.tipoUsuario = usuario.TipoUsuario.rotulo;
-          res.send(usuario);
+          const token = jwt.sign({ usuario }, process.env.JWT_SECRET, {
+            expiresIn: 86400 // expires in 24h
+          });
+          const usuarioData = {
+            id: usuario.id,
+            tipoUsuarioId: usuario.tipoUsuarioId,
+            nome: usuario.nome,
+            email: usuario.email,
+          }
+          res.status(200).send({ token, usuario: usuarioData });
         } else {
           res.status(401).send({ error: "Email e/ou senha inválido(s)." });
         }
@@ -80,9 +88,7 @@ const login = async (req, res) => {
 const logout = (req, res) => {
   // #swagger.tags = ['Usuarios']
   // #swagger.summary = 'Efetua o logout do usuário na aplicação.'
-  req.session.destroy((err) => {
-    res.send({ msg: "Logout realizado com sucesso." });
-  });
+  res.status(200).send({ token: null });
 };
 
 export default { index, create, login, logout };

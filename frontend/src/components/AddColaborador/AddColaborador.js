@@ -34,7 +34,7 @@ const AddColaborador = () => {
         tipoUsuarioId: 2,
       })
       .then((resp) => {
-        navigate(`/login`);
+        navigate(`/`);
       })
       .catch((err) => {
         if (

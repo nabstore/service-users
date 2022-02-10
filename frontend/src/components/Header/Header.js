@@ -11,6 +11,7 @@ import {
   faUserPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import api from "../../services/api";
+import { tipoUsuario } from "../../utils/tipoUsuarioEnum";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -48,7 +49,7 @@ const Header = () => {
           </div>
           <div className="float-end">
             <ul className="navbar-nav">
-              {user.tipoUsuario === "colaborador" ? (
+              {user.tipoUsuarioId === tipoUsuario.COLABORADOR ? (
                 <li className="nav-item">
                   <Link className="nav-link" to="/colaborador/add">
                     Add Colaborador

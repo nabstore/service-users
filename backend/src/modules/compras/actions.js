@@ -4,11 +4,14 @@ const { Op } = require("sequelize");
 const create = async (req, res) => {
   // #swagger.tags = ['Compras']
   // #swagger.summary = 'Realiza uma compra e salva no banco.'
+  /* #swagger.security = [{
+      "bearerAuth": []
+  }] */
   const estimatedDeliveryDate = new Date();
   estimatedDeliveryDate.setDate(estimatedDeliveryDate.getDate() - 7)
   try {
     const compra = await Compra.create({
-      usuarioId: req.session.userId,
+      usuarioId: req.usuario.id,
       enderecoId: req.body.enderecoId,
       cartaoId: req.body.cartaoId,
       estimatedDeliveryDate: estimatedDeliveryDate,
@@ -42,6 +45,9 @@ const create = async (req, res) => {
 const index = async(req, res) => {
   // #swagger.tags = ['Compras']
   // #swagger.summary = 'Retorna uma lista com todas as compras do usuário logado'
+  /* #swagger.security = [{
+      "bearerAuth": []
+  }] */
   try {
     // Realiza a entrega de compras cuja entrega estimada já foi alcançada
     const today = new Date();
@@ -56,7 +62,7 @@ const index = async(req, res) => {
     
     const compras = await Compra.findAll({ 
       where: {
-        usuarioId: req.session.userId
+        usuarioId: req.usuario.id
       },
       include: [CompraItem],
     });
@@ -70,11 +76,14 @@ const index = async(req, res) => {
 const read = async (req, res) => {
   // #swagger.tags = ['Compras']
   // #swagger.summary = 'Retorna os dados de uma compra do usuário logado.'
+  /* #swagger.security = [{
+      "bearerAuth": []
+  }] */
   const id = req.params.id;
   try {
     const compra = await Compra.findOne({
       where: {
-        usuarioId: req.session.userId,
+        usuarioId: req.usuario.id,
         id,
       },
       include: [Cartao, CompraItem, Endereco],

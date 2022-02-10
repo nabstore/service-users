@@ -3,7 +3,10 @@ import { Endereco } from "../../models/index";
 const index = async (req, res) => {
   // #swagger.tags = ['Enderecos']
   // #swagger.summary = 'Lista os endereços de um usuário.'
-  const id = req.session.userId;
+  /* #swagger.security = [{
+      "bearerAuth": []
+  }] */
+  const id = req.usuario.id;
 
   if (!id) {
     res.status(400).send({ msg: "Informe um ID de usuário." });
@@ -25,7 +28,10 @@ const index = async (req, res) => {
 const create = async (req, res) => {
   // #swagger.tags = ['Enderecos']
   // #swagger.summary = 'Cria um novo endereço para um usuário.'
-  const id = req.session.userId;
+  /* #swagger.security = [{
+      "bearerAuth": []
+  }] */
+  const id = req.usuario.id;
   const endereco = {
     usuarioId: id,
     logradouro: req.body.logradouro,

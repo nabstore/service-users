@@ -7,7 +7,7 @@ const initialState = localStorage.getItem("user")
       email: "",
       nome: "",
       logado: false,
-      tipoUsuario: "visitante",
+      tipoUsuarioId: "visitante",
     };
 
 export const userSlicer = createSlice({
@@ -20,7 +20,7 @@ export const userSlicer = createSlice({
         email: action.payload.email,
         nome: action.payload.nome,
         logado: true,
-        tipoUsuario: action.payload.TipoUsuario.rotulo,
+        tipoUsuarioId: action.payload.tipoUsuarioId,
       };
 
       localStorage.setItem("user", JSON.stringify(data));

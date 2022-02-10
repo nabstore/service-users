@@ -15,7 +15,7 @@ import api from "../../services/api";
 import { NO_IMAGE_URL } from "../../utils/images";
 import LoadingIcons from "react-loading-icons";
 import AddProduto from "../AddProduto/AddProduto";
-import { currencyFormat } from "../../utils/format";
+import { tipoUsuario } from "../../utils/tipoUsuarioEnum";
 
 const Produtos = () => {
   const [produtos, setProdutos] = useState(null);
@@ -161,7 +161,7 @@ const Produtos = () => {
 
       <div>
         <Title className="float-start">Produtos</Title>
-        {user.tipoUsuario === "colaborador" ? (
+        {user.tipoUsuarioId === tipoUsuario.COLABORADOR ? (
           <div className="float-end">
             <AddProdutoButton onClick={() => setShowModal(true)}>
               <FontAwesomeIcon className="me-2" icon={faPlusCircle} />

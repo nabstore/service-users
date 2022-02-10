@@ -30,6 +30,7 @@ import {
 } from "./styles";
 import { currencyFormat } from "../../utils/format";
 import EditProduto from "../EditProduto/EditProduto";
+import { tipoUsuario } from "../../utils/tipoUsuarioEnum";
 
 const Produto = () => {
   const { id } = useParams();
@@ -162,7 +163,7 @@ const Produto = () => {
               <DetailsTitle>Detalhes do Produto</DetailsTitle>
               <Details>{produto.descricao}</Details>
             </div>
-            {user.tipoUsuario === "colaborador" ? (
+            {user.tipoUsuarioId === tipoUsuario.COLABORADOR ? (
               <div className="card-body d-flex justify-content-center">
                 <DeleteButton onClick={handleDelete}>
                   <FontAwesomeIcon className="me-2" icon={faTrash} />

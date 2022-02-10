@@ -9,11 +9,11 @@ module.exports = (sequelize, DataTypes) => {
      */
 
     static get COLABORADOR() {
-      return "colaborador";
+      return 2;
     }
 
     static get CLIENTE() {
-      return "cliente";
+      return 1;
     }
 
     static associate(models) {
