@@ -31,6 +31,7 @@ import {
 import { currencyFormat } from "../../utils/format";
 import EditProduto from "../EditProduto/EditProduto";
 import { tipoUsuario } from "../../utils/tipoUsuarioEnum";
+import "antd/dist/antd.css";
 import { notification } from 'antd';
 
 const Produto = () => {

@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import { SubmitButton } from "../AddProduto/styles";
+import "antd/dist/antd.css";
 import { notification } from 'antd';
 
 const Checkout = () => {

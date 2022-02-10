@@ -6,7 +6,6 @@ import reportWebVitals from "./reportWebVitals";
 import "bootstrap/dist/css/bootstrap.css";
 import store from "./redux/store";
 import { Provider } from "react-redux";
-import "antd/dist/antd.css";
 
 ReactDOM.render(
   <Provider store={store}>

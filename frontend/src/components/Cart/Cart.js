@@ -23,6 +23,7 @@ import { EditButton, GoBackLink } from "../Produto/styles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
+import "antd/dist/antd.css";
 import { notification } from "antd";
 
 const Cart = () => {
