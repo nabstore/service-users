@@ -9,7 +9,7 @@ const app = express();
 
 app.use(morgan('tiny'));
 app.use(cors({
-    origin: 'http://localhost:3021',
+    origin: ['http://localhost:3021', 'http://localhost:3015'],
     methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD', 'DELETE'],
     credentials: true
   }));
