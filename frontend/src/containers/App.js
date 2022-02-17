@@ -16,7 +16,6 @@ import {
   Signup,
   Sobre,
 } from "../screens";
-import "./App.css";
 
 function App() {
   return (
