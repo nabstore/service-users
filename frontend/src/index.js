@@ -3,7 +3,7 @@ import {registerApplication, start} from 'single-spa';
 // Registra a root-config: https://single-spa.js.org/docs/api/#registerapplication
 registerApplication({
   name: "@nabstore/root-config",
-  app: () => import('./root.app.js'),
+  app: () => import('./nabstore-monolito.js'),
   activeWhen: ["/"],
 });
 
