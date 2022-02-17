@@ -30,7 +30,8 @@
       "imports": {
         "@nabstore/root-config": "//localhost:3015/nabstore-root-config.js",
         "@nabstore/styleguide": "//localhost:8500/nabstore-styleguide.js",
-        "@nabstore/mfe-users": "//localhost:5600/nabstore-mfe-users.js"
+        "@nabstore/mfe-users": "//localhost:5600/nabstore-mfe-users.js",
+        "@nabstore/utils": "//localhost:3025/nabstore-utils.js"
       }
     }
   </script>
@@ -53,6 +54,7 @@
   <script>
     System.import('@nabstore/root-config');
     System.import('@nabstore/styleguide');
+    System.import('@nabstore/utils');
   </script>
   <import-map-overrides-full show-when-local-storage="devtools" dev-libs></import-map-overrides-full>
 </body>
