@@ -1,20 +1,12 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import "./index.css";
-import App from "./App";
-import reportWebVitals from "./reportWebVitals";
-import "bootstrap/dist/css/bootstrap.css";
-import store from "./redux/store";
-import { Provider } from "react-redux";
+import {registerApplication, start} from 'single-spa';
 
-ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById("root")
-);
+// Registra a root-config: https://single-spa.js.org/docs/api/#registerapplication
+registerApplication({
+  name: "@nabstore/root-config",
+  app: () => import('./nabstore-monolito.js'),
+  activeWhen: ["/"],
+});
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+// Inicia a aplicação: https://single-spa.js.org/docs/api/#start
+start();
+ 
