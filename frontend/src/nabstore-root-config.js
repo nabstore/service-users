@@ -19,6 +19,15 @@ registerApplication({
   },
 });
 
+registerApplication({
+  name: "@nabstore/mfe-products",
+  app: () => System.import("@nabstore/mfe-products"),
+  activeWhen: ["/products"],
+  customProps: {
+    store,
+  },
+});
+
 System.import("@nabstore/styleguide").then(() => {
   start();
 });
