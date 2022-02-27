@@ -7,6 +7,7 @@ import { Card, Info, Value } from "./styles";
 import { useEffect, useState } from "react";
 import "antd/dist/antd.css";
 import { notification } from "antd";
+import { routes } from "@nabstore/utils";
 import Button from "../../components/Button";
 import Typography from "../../components/Typografy";
 import Anchor from "../../components/Anchor";
@@ -49,7 +50,7 @@ const Checkout = () => {
         };
         notification.success(args);
         dispatch(cleanCart());
-        navigate("/");
+        navigate(routes.HOME);
       })
       .catch((err) => {
         const args = {
@@ -63,7 +64,7 @@ const Checkout = () => {
 
   return (
     <div className="container">
-      <Anchor.GoBack path="/enderecos" text="Voltar aos endereços" />
+      <Anchor.GoBack path={routes.ENDERECOS} text="Voltar aos endereços" />
 
       <div className="d-flex justify-content-center">
         <Typography.Title>Confirmar Compra</Typography.Title>

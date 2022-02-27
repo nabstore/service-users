@@ -13,6 +13,7 @@ import {
   Line,
   SignUpLink,
 } from "./styles";
+import { routes } from "@nabstore/utils";
 import Button from "../../components/Button";
 
 const Login = () => {
@@ -31,8 +32,8 @@ const Login = () => {
       .then((resp) => {
         dispatch(login(resp));
         setError(false);
-        if (cart.produtos.length > 0) navigate("/enderecos");
-        else navigate("/");
+        if (cart.produtos.length > 0) navigate(routes.ENDERECOS);
+        else navigate(routes.HOME);
       })
       .catch((err) => {
         if (err.response?.status === 400) {
@@ -78,7 +79,7 @@ const Login = () => {
         <Button.Secondary margin="50px 0">Entrar</Button.Secondary>
 
         <div className="d-flex justify-content-center">
-          <SignUpLink to="/signup">
+          <SignUpLink to={routes.SIGNUP}>
             Não possuo uma conta <FontAwesomeIcon icon={faArrowRight} />
           </SignUpLink>
         </div>

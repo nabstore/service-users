@@ -13,6 +13,7 @@ import { useEffect, useState } from "react";
 import "antd/dist/antd.css";
 import { notification } from "antd";
 import { isAuthenticated } from "../../services/auth";
+import { routes } from "@nabstore/utils";
 import Button from "../../components/Button";
 import Typography from "../../components/Typografy";
 import Anchor from "../../components/Anchor";
@@ -44,9 +45,9 @@ const Cart = () => {
 
   const handleComprar = () => {
     if (isAuthenticated()) {
-      navigate("/cartoes");
+      navigate(routes.CARDS);
     } else {
-      navigate("/login");
+      navigate(routes.LOGIN);
     }
   };
 
@@ -79,7 +80,7 @@ const Cart = () => {
 
   return (
     <div className="container">
-      <Anchor.GoBack path="/" text="Voltar aos produtos" />
+      <Anchor.GoBack path={routes.HOME} text="Voltar aos produtos" />
 
       <div className="d-flex justify-content-center">
         <Typography.Title>Meu Carrinho</Typography.Title>

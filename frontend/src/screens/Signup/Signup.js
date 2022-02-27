@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import Button from "../../components/Button";
 import api from "../../services/api";
 import { Container } from "./styles";
+import { routes } from "@nabstore/utils";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -34,7 +35,7 @@ const Signup = () => {
         tipoUsuarioId: 1,
       })
       .then((resp) => {
-        navigate(`/login`);
+        navigate(routes.LOGIN);
       })
       .catch((err) => {
         if (

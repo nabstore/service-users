@@ -22,6 +22,7 @@ import {
   Sobre,
 } from "../screens";
 import { Header } from "@nabstore/styleguide";
+import { monolitoRoutes } from "@nabstore/utils";
 import { logout as logoutAction } from "../redux/slicer/userSlicer";
 
 const WrappedApp = () => {
@@ -50,18 +51,18 @@ const WrappedApp = () => {
       <WrapperHeader />
       <div className="container-sm mt-5">
         <Routes>
-          <Route path="/sobre" element={<Sobre />} />
-          <Route path="/" exact element={<Produtos />} />
-          <Route path="/produto/:id" element={<Produto />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/colaborador/add" element={<AddColaborador />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/enderecos" exact element={<Enderecos />} />
-          <Route path="/cartoes" exact element={<Cartoes />} />
-          <Route path="/checkout" element={<Checkout />} />
-          <Route path="/compras" element={<Compras />} />
-          <Route path="/compras/:id" element={<Compra />} />
+          <Route path={monolitoRoutes.ABOUT} element={<Sobre />} />
+          <Route path={monolitoRoutes.HOME} exact element={<Produtos />} />
+          <Route path={monolitoRoutes.PRODUTO} element={<Produto />} />
+          <Route path={monolitoRoutes.SIGNUP} element={<Signup />} />
+          <Route path={monolitoRoutes.CREATE_COLABORADOR} element={<AddColaborador />} />
+          <Route path={monolitoRoutes.LOGIN} element={<Login />} />
+          <Route path={monolitoRoutes.CART} element={<Cart />} />
+          <Route path={monolitoRoutes.ENDERECOS} exact element={<Enderecos />} />
+          <Route path={monolitoRoutes.CARDS} exact element={<Cartoes />} />
+          <Route path={monolitoRoutes.CHECKOUT} element={<Checkout />} />
+          <Route path={monolitoRoutes.COMPRAS} element={<Compras />} />
+          <Route path={monolitoRoutes.COMPRA} element={<Compra />} />
         </Routes>
       </div>
     </BrowserRouter>

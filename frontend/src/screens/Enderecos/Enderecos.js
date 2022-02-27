@@ -6,6 +6,7 @@ import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 import { selectEndereco } from "../../redux/slicer/cartSlicer";
 import api from "../../services/api";
 import { Data, Label, CardTitle, Card } from "./styles";
+import { routes } from "@nabstore/utils";
 import AddEndereco from "../AddEndereco/AddEndereco";
 import Button from "../../components/Button";
 import Typography from "../../components/Typografy";
@@ -26,7 +27,7 @@ const Enderecos = () => {
 
   const handleSelect = (endereco) => {
     dispatch(selectEndereco(endereco));
-    navigate("/checkout");
+    navigate(routes.CHECKOUT);
   };
 
   return (
@@ -36,7 +37,7 @@ const Enderecos = () => {
         showModal={showModal}
       />
 
-      <Anchor.GoBack path="/cartoes" text="Voltar aos cartões" />
+      <Anchor.GoBack path={routes.CARDS} text="Voltar aos cartões" />
 
       <div className="float-end">
         <Button.Primary onClick={() => setShowModal(true)}>

@@ -33,7 +33,7 @@ const AddProduto = ({ showModal, handleClose }) => {
     api
       .createProduto(formData)
       .then((resp) => {
-        navigate(`/produto/${resp.id}`);
+        navigate(routes.PRODUTO.replace(":id", resp.id));
       })
       .catch((err) => {
         if (err.response.status === 400) {

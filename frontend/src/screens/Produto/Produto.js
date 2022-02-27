@@ -26,6 +26,7 @@ import EditProduto from "../EditProduto/EditProduto";
 import { tipoUsuario } from "../../utils/tipoUsuarioEnum";
 import "antd/dist/antd.css";
 import { notification } from "antd";
+import { routes } from "@nabstore/utils";
 import Button from "../../components/Button";
 import Typography from "../../components/Typografy";
 import Anchor from "../../components/Anchor";
@@ -62,7 +63,7 @@ const Produto = () => {
       api
         .deleteProduto(id)
         .then((produto) => {
-          navigate("/");
+          navigate(routes.HOME);
         })
         .catch((error) => console.error("Erro ao deletar produto."));
     }
@@ -83,7 +84,7 @@ const Produto = () => {
       duration: 2,
     };
     notification.success(args);
-    navigate("/");
+    navigate(routes.HOME);
   };
 
   const handleEstimarEntrega = () => {
@@ -105,7 +106,7 @@ const Produto = () => {
       />
       <div className="col">
         <div className="float-start">
-          <Anchor.GoBack path="/" text="Voltar aos produtos" />
+          <Anchor.GoBack path={routes.HOME} text="Voltar aos produtos" />
         </div>
       </div>
 

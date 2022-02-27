@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import Button from "../../components/Button";
 import api from "../../services/api";
 import { Container } from "./styles";
+import { routes } from "@nabstore/utils";
 
 const AddColaborador = () => {
   const navigate = useNavigate();
@@ -34,7 +35,7 @@ const AddColaborador = () => {
         tipoUsuarioId: 2,
       })
       .then((resp) => {
-        navigate(`/`);
+        navigate(routes.HOME);
       })
       .catch((err) => {
         if (
