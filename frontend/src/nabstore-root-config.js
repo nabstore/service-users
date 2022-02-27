@@ -1,4 +1,5 @@
 import { registerApplication, start } from "single-spa";
+import { addProduto } from "./redux/slicer/cartSlicer";
 import { login, logout } from "./redux/slicer/userSlicer";
 import store from "./redux/store";
 
@@ -25,6 +26,7 @@ registerApplication({
   activeWhen: ["/products"],
   customProps: {
     store,
+    addProductToCartAction: addProduto,
   },
 });
 
