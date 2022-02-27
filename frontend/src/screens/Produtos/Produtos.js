@@ -13,6 +13,7 @@ import LoadingIcons from "react-loading-icons";
 import AddProduto from "../AddProduto/AddProduto";
 import { tipoUsuario } from "../../utils/tipoUsuarioEnum";
 import { currencyFormat } from "../../utils/format";
+import { routes } from "@nabstore/utils";
 import Button from "../../components/Button";
 import Typography from "../../components/Typografy";
 import Anchor from "../../components/Anchor";
@@ -85,7 +86,7 @@ const Produtos = () => {
         </div>
         <ul className="list-group list-group-flush">
           <li className="list-group-item d-flex justify-content-center">
-            <Anchor.Primary to={`/produto/${produto.id}`}>
+            <Anchor.Primary to={routes.PRODUTO.replace(":id", produto.id)}>
               Ver detalhes
             </Anchor.Primary>
           </li>
@@ -118,7 +119,7 @@ const Produtos = () => {
       <div className="d-flex flex-column justify-content-center mb-4">
         <div className="d-flex flex-row align-items-center">
           <Typography.Title className="float-start">Últimas Compras</Typography.Title>
-          <Anchor.Primary className="ms-4" to={`/compras`}>
+          <Anchor.Primary className="ms-4" to={routes.COMRPAS}>
             Ver todas
           </Anchor.Primary>
         </div>
@@ -134,7 +135,7 @@ const Produtos = () => {
               </div>
               <ul className="list-group list-group-flush">
                 <li className="list-group-item d-flex justify-content-center">
-                  <Anchor.Primary to={`/compras/${compra.id}`}>
+                  <Anchor.Primary to={routes.COMPRA.replace(":id", compra.id)}>
                     Ver detalhes
                   </Anchor.Primary>
                 </li>

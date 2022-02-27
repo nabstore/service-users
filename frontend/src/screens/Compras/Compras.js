@@ -4,6 +4,7 @@ import { Title, Card, ProdutoTitle, Info, Value } from "./styles";
 import { useEffect, useState } from "react";
 import LoadingIcons from "react-loading-icons";
 import { currencyFormat } from "../../utils/format";
+import { routes } from "@nabstore/utils";
 import Anchor from "../../components/Anchor";
 
 const Compras = () => {
@@ -18,7 +19,7 @@ const Compras = () => {
   }, []);
 
   const handleVerDetalhes = (id) => {
-    navigate(`/compras/${id}`);
+    navigate(routes.COMPRA.replace(":id", id));
   };
 
   if (!compras) {
@@ -28,7 +29,7 @@ const Compras = () => {
 
   return (
     <div className="container">
-      <Anchor.GoBack path="/" text="Voltar aos produtos" />
+      <Anchor.GoBack path={routes.HOME} text="Voltar aos produtos" />
 
       <div className="d-flex justify-content-center">
         <Title>Minhas Compras</Title>

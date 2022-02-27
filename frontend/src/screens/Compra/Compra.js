@@ -4,6 +4,7 @@ import { Card, Info, Title, Value } from "./styles";
 import { useEffect, useState } from "react";
 import "antd/dist/antd.css";
 import { useParams } from "react-router";
+import { routes } from "@nabstore/utils";
 import LoadingIcons from "react-loading-icons";
 import Anchor from "../../components/Anchor";
 
@@ -104,7 +105,7 @@ const Checkout = () => {
 
   return (
     <div className="container">
-      <Anchor.GoBack path="/compras" text="Voltar às compras" />
+      <Anchor.GoBack path={routes.COMPRAS} text="Voltar às compras" />
 
       <div className="d-flex justify-content-center">
         <Title>Detalhes de Compra</Title>

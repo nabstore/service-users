@@ -6,6 +6,7 @@ import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 import { selectCartao } from "../../redux/slicer/cartSlicer";
 import api from "../../services/api";
 import { Data, Label, CardTitle, Card } from "./styles";
+import { routes } from "@nabstore/utils";
 import AddCartao from "../AddCartao/AddCartao";
 import Button from "../../components/Button";
 import Typography from "../../components/Typografy";
@@ -26,7 +27,7 @@ const Cartoes = () => {
 
   const handleSelect = (cartao) => {
     dispatch(selectCartao(cartao));
-    navigate("/enderecos");
+    navigate(routes.ENDERECOS);
   };
 
   return (
@@ -36,7 +37,7 @@ const Cartoes = () => {
         showModal={showModal} 
       />
 
-      <Anchor.GoBack path="/cart" text="Voltar ao carrinho" />
+      <Anchor.GoBack path={routes.CART} text="Voltar ao carrinho" />
 
       <div className="float-end">
         <Button.Primary onClick={() => setShowModal(true)}>

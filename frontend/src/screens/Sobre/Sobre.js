@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import Button from "../../components/Button";
 import { Subtitle, Text, Title } from "./styles";
+import { routes } from "@nabstore/utils";
 
 const Sobre = () => {
   const navigate = useNavigate();
@@ -16,7 +17,7 @@ const Sobre = () => {
         quer com conforto e praticidade.
       </Text>
 
-      <Button.Primary width="480px" margin="80px 0" onClick={() => navigate("/")}>
+      <Button.Primary width="480px" margin="80px 0" onClick={() => navigate(routes.HOME)}>
         Ver Produtos
       </Button.Primary>
     </div>
