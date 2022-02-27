@@ -1,6 +1,7 @@
 import { registerApplication, start } from "single-spa";
 import { addProduto } from "./redux/slicer/cartSlicer";
-import { login, logout } from "./redux/slicer/userSlicer";
+import { login } from "./redux/slicer/userSlicer";
+import { selectEndereco } from "./redux/slicer/cartSlicer";
 import store from "./redux/store";
 
 registerApplication({
@@ -16,7 +17,7 @@ registerApplication({
   customProps: {
     store,
     loginAction: login,
-    logoutAction: logout,
+    selectEnderecoAction: selectEndereco,
   },
 });
 
