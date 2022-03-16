@@ -1,7 +1,6 @@
 import { registerApplication, start } from "single-spa";
-import { addProduto } from "./redux/slicer/cartSlicer";
+import { addProduto, cleanCart, selectCartao, removeProduto, selectEndereco } from "./redux/slicer/cartSlicer";
 import { login } from "./redux/slicer/userSlicer";
-import { selectEndereco } from "./redux/slicer/cartSlicer";
 import store from "./redux/store";
 
 registerApplication({
@@ -28,6 +27,19 @@ registerApplication({
   customProps: {
     store,
     addProductToCartAction: addProduto,
+  },
+});
+
+registerApplication({
+  name: "@nabstore/mfe-checkout",
+  app: () => System.import("@nabstore/mfe-checkout"),
+  activeWhen: ["/checkout"],
+  customProps: {
+    store,
+    cleanCartAction: cleanCart,
+    selectCartAction: selectCartao,
+    addProductToCartAction: addProduto,
+    removeProductFromCartAction: removeProduto,
   },
 });
 
