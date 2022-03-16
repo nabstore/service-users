@@ -1,12 +1,1 @@
 /node_modules
-
-# Exclui as imagens dos produtos, com exceção das imagens dos seeds
-/public/uploads/*
-!/public/uploads/1
-!/public/uploads/2
-!/public/uploads/3
-!/public/uploads/4
-!/public/uploads/5
-!/public/uploads/6
-!/public/uploads/7
-!/public/uploads/8
